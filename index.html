@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="ja">
-	<head>
-		<meta charset="utf-8">
-		<title>Vue.js App</title>
-		<link href="main.css" rel="stylesheet">
-	</head>
-	<body>
-		<div id="app">
-			<!-- この#appの内側にテンプレートを書き込んでいく -->
-			<p><button v-on:click="show=!show">切り替え</button></p>
-			<transition>
-				<div v-show="show">
-					トランジションさせたい要素
-				</div>
-			</transition>
-		</div>
-		<h1>Hello!</h1>
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-		<script src="main.js"></script>
-	</body>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="app">
+       <p>
+    <button v-on:click="doShuffle">シャッフル</button>
+    <button v-on:click="doAdd">追加</button>
+  </p>
+  <transition-group tag="ul" class="list" v-on:before-leave="beforeLeave">
+    <li v-for="(item, index) in list"
+      v-bind:key="item"
+      class="item"
+      v-on:click="doRemove(index)">{{ item }}</li>
+  </transition-group>
+    </div>
+    <h1>Hello!</h1>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
 </html>
